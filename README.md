@@ -20,6 +20,8 @@ The project simulates a **real-world data science workflow**, covering:
 ---
 
 ## 🗂️ Project Structure
+```
+
 Customer-churn-prediction/
 │
 ├── notebooks/
@@ -43,7 +45,7 @@ Customer-churn-prediction/
 ├── README.md
 └── requirements.txt
 
-
+```
 
 ---
 
