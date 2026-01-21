@@ -46,8 +46,7 @@ input_encoded=input_encoded.reindex(columns=feature_columns, fill_value=0)
 
 num_cols=['tenure', 'MonthlyCharges', 'TotalCharges']
 
-st.write("Numeric cols available:", input_encoded.columns.tolist())
-st.write("Expected numeric cols:", num_cols)
+
 
 input_encoded[num_cols]=scaler.transform(input_encoded[num_cols])
 
