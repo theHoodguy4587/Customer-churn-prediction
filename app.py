@@ -5,6 +5,7 @@ import joblib
 model=joblib.load('models/logistic_regression_model.pkl')
 scaler=joblib.load('models/scaler.pkl')
 feature_columns=joblib.load('models/feature_names.pkl')
+num_cols=joblib.load('models/num_cols_to_scale.pkl')
 
 st.set_page_config(page_title="Customer Churn Prediction", layout="centered")
 
@@ -42,18 +43,53 @@ input_encoded=input_encoded.reindex(columns=feature_columns, fill_value=0)
 
 
 
+default_features = {
+    'Partner_Yes': 1,
+    'Dependents_Yes': 0,
+    'PhoneService_Yes': 1,
+    'MultipleLines_Yes': 0,
+    'PaperlessBilling_Yes': 1,
+    'OnlineSecurity_Yes': 0,
+    'OnlineBackup_Yes': 0,
+    'DeviceProtection_Yes': 0,
+    'StreamingTV_Yes': 0,
+    'StreamingMovies_Yes': 0,
+}
+
+for col, val in default_features.items():
+    if col in input_encoded.columns:
+        input_encoded[col] = val
 
 
-num_cols=['tenure', 'MonthlyCharges', 'TotalCharges']
+if internet_service == "No":
+    no_internet_cols = [
+        'OnlineSecurity_No internet service',
+        'OnlineBackup_No internet service',
+        'DeviceProtection_No internet service',
+        'TechSupport_No internet service',
+        'StreamingTV_No internet service',
+        'StreamingMovies_No internet service'
+    ]
+    for col in no_internet_cols:
+        if col in input_encoded.columns:
+            input_encoded[col] = 1
+
+
+
+
 
 
 
 input_encoded[num_cols]=scaler.transform(input_encoded[num_cols])
 
+
+
+
 if st.button("Predict Churn"):
     prediction=model.predict(input_encoded)[0]
     prediction_proba=model.predict_proba(input_encoded)[0][1]
 
+    
     if prediction==1:
         st.error(f"High Risk of churn! (Probability: {prediction_proba:.2f})")
         st.write("Consider offering retention incentives or improving customer support.")
