@@ -106,9 +106,9 @@ if st.button("Predict Churn"):
 
 
 
-    st.markdown("""
-    ### Business Use Case
-    This model helps telecom companies identify high-risk customers early, enabling proactive retention strategies such as targeted offers, improved support, or contract adjustments.
-    """)
+st.markdown("""
+### Business Use Case
+This model helps telecom companies identify high-risk customers early, enabling proactive retention strategies such as targeted offers, improved support, or contract adjustments.
+""")
 
 
