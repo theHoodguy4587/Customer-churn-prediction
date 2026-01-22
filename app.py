@@ -60,7 +60,6 @@ for col, val in default_features.items():
     if col in input_encoded.columns:
         input_encoded[col] = val
 
-
 if internet_service == "No":
     no_internet_cols = [
         'OnlineSecurity_No internet service',
@@ -75,15 +74,7 @@ if internet_service == "No":
             input_encoded[col] = 1
 
 
-
-
-
-
-
 input_encoded[num_cols]=scaler.transform(input_encoded[num_cols])
-
-
-
 
 if st.button("Predict Churn"):
     prediction=model.predict(input_encoded)[0]
@@ -96,3 +87,28 @@ if st.button("Predict Churn"):
     else:
         st.success(f"The customer is unlikely to churn. (Probability: {prediction_proba:.2f})")
         st.write("Focus on maintaining current service quality to keep the customer satisfied.")
+
+
+
+    st.markdown("### Customer Profile Summary")
+    st.write({
+        "Tenure (months)": tenure,
+        "Monthly Charges": monthly_charges,
+        "Contract Type": contract_type,
+        "Internet Service": internet_service,
+        "Payment Method": payment_method,
+        "Tech Support": tech_support
+    })
+
+    st.progress(min(prediction_proba, 1.0))
+    st.caption("Churn Risk Level")
+
+
+
+
+    st.markdown("""
+    ### Business Use Case
+    This model helps telecom companies identify high-risk customers early, enabling proactive retention strategies such as targeted offers, improved support, or contract adjustments.
+    """)
+
+
