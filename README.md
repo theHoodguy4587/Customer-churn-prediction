@@ -28,6 +28,19 @@ The project follows a **real-world data science workflow**, including:
 
 ---
 
+## 🖥️ Application Preview
+
+### 🔹 Streamlit User Interface
+![App UI](screenshots/app_ui.png)
+
+### 🔹 Feature Importance
+![Feature Importance](screenshots/feature_importance.png)
+
+### 🔹 ROC Curve
+![ROC Curve](screenshots/roc_curve.png)
+
+---
+
 ## 🌐 Live Application (Deployment)
 
 An interactive **Streamlit web application** demonstrates real-time churn prediction using the trained model.
